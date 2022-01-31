@@ -15,7 +15,7 @@ if os.environ.get('FLASK_COVERAGE'):
     COV.start()
 
 import click
-from flask import Flask
+from flask import Flask, make_response, jsonify #ADDED make_response
 from flask_bcrypt import Bcrypt
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -39,8 +39,8 @@ def root_site():
     #return "<p>It works!</p>"
     responseObject = {
             'status': 'success',
-            'message': 'Request successful but please send an HTTP POST request to register the user.'
-        }
+            'message': 'Welcome to the website!'
+    }
     return make_response(jsonify(responseObject)), 201
 
 from project.server.auth.views import auth_blueprint
