@@ -12,6 +12,7 @@ class RegisterAPI(MethodView):
     """
 
     def get(self):
+        #print("TESTING DEBUGGER")
         responseObject = {
             'status': 'success',
             'message': 'Request successful but please send an HTTP POST request to register the user.'
@@ -29,7 +30,6 @@ class RegisterAPI(MethodView):
                     email=post_data.get('email'),
                     password=post_data.get('password')
                 )
-
                 # insert the user
                 db.session.add(user)
                 db.session.commit()
@@ -38,7 +38,7 @@ class RegisterAPI(MethodView):
                 responseObject = {
                     'status': 'success',
                     'message': 'Successfully registered.',
-                    'auth_token': auth_token.decode()
+                    'auth_token': auth_token
                 }
                 return make_response(jsonify(responseObject)), 201
             except Exception as e:
@@ -64,3 +64,39 @@ auth_blueprint.add_url_rule(
     view_func=registration_view,
     methods=['POST', 'GET']
 )
+
+class ViewAPI(MethodView):
+    """
+    Viewing User Resource
+    """
+    def get(self):
+        #responseObject
+        users = User.query.all()
+        responseObject = []
+        # responseObject = {
+        #     'status':'good'
+        # }
+        #db.session.query.all()
+        temp = {}
+        #print(type(users[0].id)) ## WORKS
+
+        for user in users:
+            temp['id'] = user.id
+            temp['email'] = user.email
+            temp['password'] = user.password
+            temp['registered_on'] = user.registered_on
+            temp['admin'] = user.admin
+            print(temp)
+            responseObject.append(temp)
+        print(responseObject)
+        return make_response(jsonify(responseObject)), 201
+
+#define API resources
+users_view = ViewAPI.as_view('view_api')
+
+auth_blueprint.add_url_rule(
+    '/users/index',
+    view_func=users_view,
+    methods=['GET']
+)
+
