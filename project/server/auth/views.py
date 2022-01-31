@@ -70,25 +70,23 @@ class ViewAPI(MethodView):
     Viewing User Resource
     """
     def get(self):
-        #responseObject
         users = User.query.all()
         responseObject = []
+
         # responseObject = {
         #     'status':'good'
         # }
-        #db.session.query.all()
+        
+        #copies each entry in the User table onto responseObject 
         temp = {}
-        #print(type(users[0].id)) ## WORKS
-
         for user in users:
-            temp['id'] = user.id
-            temp['email'] = user.email
-            temp['password'] = user.password
-            temp['registered_on'] = user.registered_on
             temp['admin'] = user.admin
-            print(temp)
-            responseObject.append(temp)
-        print(responseObject)
+            temp['email'] = user.email
+            temp['id'] = user.id
+            temp['registered_on'] = user.registered_on
+            temp2 = temp.copy() #shallow copy of dictionary 
+            responseObject.append(temp2)
+        #print(responseObject)
         return make_response(jsonify(responseObject)), 201
 
 #define API resources
