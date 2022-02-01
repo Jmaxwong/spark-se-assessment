@@ -15,7 +15,7 @@ if os.environ.get('FLASK_COVERAGE'):
     COV.start()
 
 import click
-from flask import Flask, make_response, jsonify #ADDED make_response and jsonify and blueprint
+from flask import Flask
 from flask_bcrypt import Bcrypt
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
