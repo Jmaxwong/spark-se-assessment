@@ -15,7 +15,7 @@ if os.environ.get('FLASK_COVERAGE'):
     COV.start()
 
 import click
-from flask import Flask, make_response, jsonify #ADDED make_response
+from flask import Flask, make_response, jsonify #ADDED make_response and jsonify and blueprint
 from flask_bcrypt import Bcrypt
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -34,17 +34,36 @@ db = SQLAlchemy(app)
 from project.server.models import User
 migrate = Migrate(app, db)
 
+# from project.server.auth.views import auth_blueprint
+# app.register_blueprint(auth_blueprint)
+
 @app.route("/")
 def root_site():
-    #return "<p>It works!</p>"
-    responseObject = {
-            'status': 'success',
-            'message': 'Welcome to the website!'
-    }
-    return make_response(jsonify(responseObject)), 201
+#def get():
+    return "<p>It works!</p>"
+    # responseObject = {
+    #         'status': 'success',
+    #         'message': 'Welcome to the website!'
+    # }
+    # return make_response(jsonify(responseObject)), 201
 
-from project.server.auth.views import auth_blueprint
-app.register_blueprint(auth_blueprint)
+# class HomeAPI(MethodView):
+#     """
+#     Home Resource 
+#     """
+#     def get(self):
+#         responseObject = {
+#             'status': 'success',
+#             'message': 'Welcome.'
+#         }
+#         return make_response(jsonify(responseObject)), 201
+
+# home_view = HomeAPI.as_view('home_api')
+# auth_blueprint.add_url_rule(
+#     '/',
+#     view_func=home_view,
+#     methods=['GET']
+# )
 
 @app.cli.command()
 @click.option('--coverage/--no-coverage', default=False,
