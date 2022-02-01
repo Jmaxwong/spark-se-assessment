@@ -20,6 +20,7 @@ Jinja2==2.11.3
 Mako==1.1.6
 MarkupSafe==1.1.1
 Paste==3.5.0
+#postgresql==11.6
 ply==3.11
 psycopg2==2.8.6
 pycparser==2.20
