@@ -39,31 +39,12 @@ migrate = Migrate(app, db)
 
 @app.route("/")
 def root_site():
-#def get():
-    return "<p>It works!</p>"
-    # responseObject = {
-    #         'status': 'success',
-    #         'message': 'Welcome to the website!'
-    # }
-    # return make_response(jsonify(responseObject)), 201
-
-# class HomeAPI(MethodView):
-#     """
-#     Home Resource 
-#     """
-#     def get(self):
-#         responseObject = {
-#             'status': 'success',
-#             'message': 'Welcome.'
-#         }
-#         return make_response(jsonify(responseObject)), 201
-
-# home_view = HomeAPI.as_view('home_api')
-# auth_blueprint.add_url_rule(
-#     '/',
-#     view_func=home_view,
-#     methods=['GET']
-# )
+    #return "<p>It works!</p>"
+    responseObject = {
+        'status': 'success',
+        'message': 'Request successful but please send an HTTP POST request to register the user.'
+    }
+    return make_response(jsonify(responseObject)), 201
 
 @app.cli.command()
 @click.option('--coverage/--no-coverage', default=False,
