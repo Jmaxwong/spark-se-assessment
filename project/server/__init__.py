@@ -42,7 +42,7 @@ def root_site():
     #return "<p>It works!</p>"
     responseObject = {
         'status': 'success',
-        'message': 'Request successful but please send an HTTP POST request to register the user.'
+        'message': 'Welcome'
     }
     return make_response(jsonify(responseObject)), 201
 
