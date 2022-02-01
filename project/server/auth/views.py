@@ -12,7 +12,6 @@ class RegisterAPI(MethodView):
     """
 
     def get(self):
-        #print("TESTING DEBUGGER")
         responseObject = {
             'status': 'success',
             'message': 'Request successful but please send an HTTP POST request to register the user.'
@@ -72,10 +71,6 @@ class ViewAPI(MethodView):
     def get(self):
         users = User.query.all()
         responseObject = []
-
-        # responseObject = {
-        #     'status':'good'
-        # }
         
         #copies each entry in the User table onto responseObject 
         temp = {}
