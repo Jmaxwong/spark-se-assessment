@@ -39,12 +39,12 @@ migrate = Migrate(app, db)
 
 @app.route("/")
 def root_site():
-    #return "<p>It works!</p>"
-    responseObject = {
-        'status': 'success',
-        'message': 'Welcome'
-    }
-    return make_response(jsonify(responseObject)), 201
+    return "<p>It works!</p>"
+    # responseObject = {
+    #     'status': 'success',
+    #     'message': 'Welcome'
+    # }
+    # return make_response(jsonify(responseObject)), 201
 
 @app.cli.command()
 @click.option('--coverage/--no-coverage', default=False,

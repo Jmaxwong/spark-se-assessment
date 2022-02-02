@@ -4,7 +4,8 @@ from flask.views import MethodView
 from project.server import bcrypt, db
 from project.server.models import User
 
-auth_blueprint = Blueprint('auth', __name__)
+auth_blueprint = Blueprint('auth', __name__) 
+users_blueprint = Blueprint('users', __name__) #ADDED
 
 class RegisterAPI(MethodView):
     """
@@ -12,7 +13,6 @@ class RegisterAPI(MethodView):
     """
 
     def get(self):
-        #print("TESTING DEBUGGER")
         responseObject = {
             'status': 'success',
             'message': 'Request successful but please send an HTTP POST request to register the user.'
@@ -30,6 +30,7 @@ class RegisterAPI(MethodView):
                     email=post_data.get('email'),
                     password=post_data.get('password')
                 )
+                
                 # insert the user
                 db.session.add(user)
                 db.session.commit()
@@ -54,7 +55,6 @@ class RegisterAPI(MethodView):
             }
             return make_response(jsonify(responseObject)), 202
 
-
 # define the API resources
 registration_view = RegisterAPI.as_view('register_api')
 
@@ -72,11 +72,6 @@ class ViewAPI(MethodView):
     def get(self):
         users = User.query.all()
         responseObject = []
-
-        # responseObject = {
-        #     'status':'good'
-        # }
-        
         #copies each entry in the User table onto responseObject 
         temp = {}
         for user in users:
@@ -86,13 +81,12 @@ class ViewAPI(MethodView):
             temp['registered_on'] = user.registered_on
             temp2 = temp.copy() #shallow copy of dictionary 
             responseObject.append(temp2)
-        #print(responseObject)
         return make_response(jsonify(responseObject)), 201
 
 #define API resources
 users_view = ViewAPI.as_view('view_api')
 
-auth_blueprint.add_url_rule(
+users_blueprint.add_url_rule(
     '/users/index',
     view_func=users_view,
     methods=['GET']

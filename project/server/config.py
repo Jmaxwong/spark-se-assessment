@@ -1,6 +1,6 @@
 import os
 basedir = os.path.abspath(os.path.dirname(__file__))
-postgres_local_base = 'postgresql:///' #'sqlite:///' 
+postgres_local_base = 'postgresql:///'
 database_name = 'diagnostic'
 user = 'pwcbilvuomyhps'
 password = '9b7848cd8db818bde579bb007b73a11ba025ada7a6ce377963f58d7c85832f3c'
